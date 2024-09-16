@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,7 @@
     <style>
         /* Стили для всего тела страницы */
         body {
+            margin: auto;
             font-family: 'Ubuntu', sans-serif; /* Шрифт ubuntu */
             display: flex; /* Используем flexbox для выравнивания */
             justify-content: center; /* Центрируем по горизонтали */
@@ -48,9 +49,17 @@
         }
 
         /* Стили для полей ввода логина и пароля */
-        .login, .password {
+        .input-group {
+            display: flex; /* Используем flexbox для выравнивания заголовка и поля ввода */
+            flex-direction: column; /* Располагаем элементы в колонку */
             width: 100%; /* Занимает всю ширину содержимого */
             margin-bottom: 15px; /* Отступ между полями */
+        }
+
+        /* Стили для заголовков */
+        .input-group h4 {
+            margin-bottom: 5px; /* Отступ снизу от заголовка */
+            text-align: left; /* Выравнивание текста по левому краю */
         }
 
         /* Стили для полей ввода */
@@ -80,11 +89,11 @@
 <body>
     <div class="frame">
         <div class="content">
-            <div class="login">
+            <div class="input-group">
                 <h4>Логин</h4>
                 <input type="text" placeholder="Введите логин"> <!-- Поле для ввода логина -->
             </div>
-            <div class="password">
+            <div class="input-group">
                 <h4>Пароль</h4>
                 <input type="password" placeholder="Введите пароль"> <!-- Поле для ввода пароля -->
             </div>

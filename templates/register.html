@@ -1,97 +1,82 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
-
     <style>
-        /* Стили для всего тела страницы */
         body {
-            font-family: 'Ubuntu', sans-serif; /* Шрифт ubuntu */
-            display: flex; /* Используем flexbox для выравнивания */
-            justify-content: center; /* Центрируем по горизонтали */
-            align-items: center; /* Центрируем по вертикали */
-            height: 100vh; /* Высота равна высоте окна браузера */
-            margin: 0; /* Убираем отступы по умолчанию */
-            background-color: #f0f0f0; /* Цвет фона страницы */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: 'Ubuntu', sans-serif; /* Применение шрифта Ubuntu */
         }
 
-        /* Стили для фрейма */
         .frame {
-            position: relative; /* Относительное позиционирование для вложенных элементов */
-            width: 450px; /* Ширина фрейма */
-            height: 350px; /* Высота фрейма */
-            background-color: white; /* Белый цвет фона фрейма */
-            border-radius: 10px; /* Закругленные углы фрейма */
-            border: 2px solid #4CAF50; /* Зеленая обводка фрейма */
-            display: flex; /* Используем flexbox для выравнивания содержимого */
-            justify-content: center; /* Центрируем содержимое по горизонтали */
-            align-items: center; /* Центрируем содержимое по вертикали */
+            width: 450px;
+            background-color: white;
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Стили для содержимого внутри фрейма */
-        .content {
-            position: absolute; /* Абсолютное позиционирование для размещения внутри фрейма */
-            width: 80%; /* Ширина содержимого (80% от ширины фрейма) */
-            height: 80%; /* Высота содержимого (80% от высоты фрейма) */
-            border-radius: 10px; /* Закругленные углы содержимого */
-            background-color: white; /* Белый фон содержимого */
-            display: flex; /* Используем flexbox для вертикального выравнивания элементов */
-            flex-direction: column; /* Располагаем элементы в колонку */
-            justify-content: center; /* Центрируем элементы по вертикали */
-            align-items: center; /* Центрируем элементы по горизонтали */
-            padding: 20px; /* Отступы внутри содержимого */
+        .input-group {
+            margin-bottom: 15px;
         }
 
-        /* Стили для полей ввода логина и пароля */
-        .login, .password {
-            width: 100%; /* Занимает всю ширину содержимого */
-            margin-bottom: 15px; /* Отступ между полями */
+        .input-group h4 {
+            margin-bottom: 5px;
+            text-align: left;
         }
 
-        /* Стили для полей ввода */
         input {
-            width: 100%; /* Занимает всю ширину поля */
-            padding: 10px; /* Отступы внутри полей ввода */
-            border: 1px solid #000; /* Черная рамка полей ввода */
-            border-radius: 5px; /* Закругленные углы полей ввода */
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
         }
 
-        /* Стили для кнопки */
         button {
-            padding: 10px 20px; /* Отступы внутри кнопки */
-            border: 1px solid #000; /* Черная рамка кнопки */
-            border-radius: 5px; /* Закругленные углы кнопки */
-            background-color: #00fd5d; /* Цвет фона кнопки */
-            color: white; /* Цвет текста кнопки */
-            cursor: pointer; /* Указатель при наведении */
+            padding: 10px 20px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            background-color: #00fd5d;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
         }
 
-        /* Стили для кнопки при наведении */
         button:hover {
-            background-color: #00b34b; /* Цвет фона кнопки при наведении */
+            background-color: #00b34b;
+        }
+
+        button:active {
+            transform: scale(0.95);
+            background-color: #009639;
         }
     </style>
 </head>
 <body>
     <div class="frame">
-        <div class="content">
-            <div class="login">
+        <form method="POST">
+            <div class="input-group">
                 <h4>Логин</h4>
-                <input type="text" placeholder="Введите логин"> <!-- Поле для ввода логина -->
+                <input type="text" name="username" placeholder="Введите логин" required>
             </div>
-            <div class="password">
+            <div class="input-group">
                 <h4>Пароль</h4>
-                <input type="password" placeholder="Введите пароль"> <!-- Поле для ввода пароля -->
+                <input type="password" name="password" placeholder="Введите пароль" required>
             </div>
             <div class="signupbtn">
-                <button>Зарегестрироваться</button> <!-- Кнопка для входа -->
+                <button type="submit">Зарегистрироваться</button>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>
