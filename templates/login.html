@@ -1,108 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Логин</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet"> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Вход</title> 
     <style>
-        /* Стили для всего тела страницы */
-        body {
-            margin: auto;
-            font-family: 'Ubuntu', sans-serif; /* Шрифт ubuntu */
-            display: flex; /* Используем flexbox для выравнивания */
-            justify-content: center; /* Центрируем по горизонтали */
-            align-items: center; /* Центрируем по вертикали */
-            height: 100vh; /* Высота равна высоте окна браузера */
-            margin: 0; /* Убираем отступы по умолчанию */
-            background-color: #f0f0f0; /* Цвет фона страницы */
+        body { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background-color: #f0f0f0; 
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            position: relative; /* Для позиционирования кнопки "Домой" */
+        } 
+        .home-button {
+            margin: 20px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
         }
-
-        /* Стили для фрейма */
-        .frame {
-            position: relative; /* Относительное позиционирование для вложенных элементов */
-            width: 450px; /* Ширина фрейма */
-            height: 350px; /* Высота фрейма */
-            background-color: white; /* Белый цвет фона фрейма */
-            border-radius: 10px; /* Закругленные углы фрейма */
-            border: 2px solid #4CAF50; /* Зеленая обводка фрейма */
-            display: flex; /* Используем flexbox для выравнивания содержимого */
-            justify-content: center; /* Центрируем содержимое по горизонтали */
-            align-items: center; /* Центрируем содержимое по вертикали */
+        .home-button a {
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
         }
-
-        /* Стили для содержимого внутри фрейма */
-        .content {
-            position: absolute; /* Абсолютное позиционирование для размещения внутри фрейма */
-            width: 80%; /* Ширина содержимого (80% от ширины фрейма) */
-            height: 80%; /* Высота содержимого (80% от высоты фрейма) */
-            border-radius: 10px; /* Закругленные углы содержимого */
-            background-color: white; /* Белый фон содержимого */
-            display: flex; /* Используем flexbox для вертикального выравнивания элементов */
-            flex-direction: column; /* Располагаем элементы в колонку */
-            justify-content: center; /* Центрируем элементы по вертикали */
-            align-items: center; /* Центрируем элементы по горизонтали */
-            padding: 20px; /* Отступы внутри содержимого */
+        .home-button a:hover {
+            background-color: #45a049;
         }
-
-        /* Стили для полей ввода логина и пароля */
-        .input-group {
-            display: flex; /* Используем flexbox для выравнивания заголовка и поля ввода */
-            flex-direction: column; /* Располагаем элементы в колонку */
-            width: 100%; /* Занимает всю ширину содержимого */
-            margin-bottom: 15px; /* Отступ между полями */
+        .frame { 
+            width: 450px; 
+            background-color: white; 
+            border-radius: 10px; 
+            border: 2px solid #4CAF50; 
+            padding: 20px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        } 
+        .input-group { 
+            margin-bottom: 15px; 
+        } 
+        .input-group h4 { 
+            margin-bottom: 5px; 
+            text-align: left; 
+        } 
+        input { 
+            width: 80%; 
+            padding: 10px; 
+            border: 1px solid #000; 
+            border-radius: 5px; 
+        } 
+        .button-group {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
         }
-
-        /* Стили для заголовков */
-        .input-group h4 {
-            margin-bottom: 5px; /* Отступ снизу от заголовка */
-            text-align: left; /* Выравнивание текста по левому краю */
+        .signupbtn {
+            margin-right: 10px;
         }
-
-        /* Стили для полей ввода */
-        input {
-            width: 100%; /* Занимает всю ширину поля */
-            padding: 10px; /* Отступы внутри полей ввода */
-            border: 1px solid #000; /* Черная рамка полей ввода */
-            border-radius: 5px; /* Закругленные углы полей ввода */
+        button { 
+            padding: 10px 20px; 
+            border: 1px solid #000; 
+            border-radius: 5px; 
+            background-color: #00fd5d; 
+            color: white; 
+            cursor: pointer; 
+            transition: background-color 0.3s, transform 0.1s; 
+        } 
+        button:hover { 
+            background-color: #00b34b; 
+        } 
+        button:active { 
+            transform: scale(0.95); 
+            background-color: #009639; 
+        } 
+        .register-link {
+            display: inline-block;
+            margin-left: auto;
         }
-
-        /* Стили для кнопки */
-        button {
-            padding: 10px 20px; /* Отступы внутри кнопки */
-            border: 1px solid #000; /* Черная рамка кнопки */
-            border-radius: 5px; /* Закругленные углы кнопки */
-            background-color: #00fd5d; /* Цвет фона кнопки */
-            color: white; /* Цвет текста кнопки */
-            cursor: pointer; /* Указатель при наведении */
+        .register-link a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-
-        /* Стили для кнопки при наведении */
-        button:hover {
-            background-color: #00b34b; /* Цвет фона кнопки при наведении */
+        .register-link a:hover {
+            color: #388e3c;
         }
-    </style>
-</head>
+        /* Flash сообщения */
+        .flash-messages {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+    </style> 
+</head> 
 <body>
-    <div class="frame">
-        <div class="content">
-            <form method="POST" action="{{ url_for('login_view') }}"> <!-- Добавлено действие формы -->
-                <div class="input-group">
-                    <h4>Логин</h4>
-                    <input type="text" name="username" placeholder="Введите логин" required> <!-- Поле для ввода логина -->
-                </div>
-                <div class="input-group">
-                    <h4>Пароль</h4>
-                    <input type="password" name="password" placeholder="Введите пароль" required> <!-- Поле для ввода пароля -->
-                </div>
-                <div class="signupbtn">
-                    <button type="submit">Войти</button> <!-- Кнопка для входа -->
-                </div>
-            </form>
-        </div>
+    <!-- Кнопка "Домой" в правом верхнем углу -->
+    <div class="home-button">
+        <a href="{{ url_for('home') }}">Домой</a>
     </div>
-</body>
+    
+    <div class="frame">
+        <!-- Блок для отображения flash-сообщений -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login_view') }}"> 
+            <div class="input-group"> 
+                <h4>Логин</h4> 
+                <input type="text" name="username" placeholder="Введите логин" required> 
+            </div> 
+            <div class="input-group"> 
+                <h4>Пароль</h4> 
+                <input type="password" name="password" placeholder="Введите пароль" required> 
+            </div> 
+            <div class="button-group">
+                <div class="signupbtn"> 
+                    <button type="submit">Войти</button> 
+                </div>
+                <div class="register-link">
+                    <p>Нет аккаунта? <a href="{{ url_for('register') }}">Зарегистрируйтесь</a></p>
+                </div>
+            </div>
+        </form> 
+    </div> 
+</body> 
 </html>

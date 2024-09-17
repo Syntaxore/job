@@ -20,7 +20,6 @@
         }
 
         .print {
-            
             margin-top: 0; /* Убираем отрицательный отступ */
         }
 
@@ -69,15 +68,20 @@
         <div class="print">
             <h1>Точка.</h1>
         </div>
-
-        <div class="account">
-            <h4 id="account-toggle" style="cursor: pointer;">Аккаунт</h4> <!-- Указатель при наведении на текст "Аккаунт" -->
-            <div class="avatar"></div> <!-- Место для аватарки -->
-            <div class="dropdown" id="dropdown-menu">
-                <a href="#">Профиль</a>
-                <a href="#">Выйти</a>
-            </div>
-        </div>
+        {% if session.get('user_id') %}
+            {% if g.user %}
+                <div class="account">
+                    <h4 id="account-toggle" style="cursor: pointer;">{{ g.user.username }}</h4> <!-- Указатель при наведении на текст "Аккаунт" -->
+                    <div class="avatar"></div> <!-- Место для аватарки -->
+                    <div class="dropdown" id="dropdown-menu">
+                        <a href="#">Профиль</a>
+                        <a href="{{ url_for('logout') }}">Выйти</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{{ url_for('login_view') }}">Войти</a>
+            {% endif %}
+        {% endif %}
     </div>
 
     <script>

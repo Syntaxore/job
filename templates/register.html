@@ -1,82 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet"> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Регистрация</title> 
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: 'Ubuntu', sans-serif; /* Применение шрифта Ubuntu */
+        body { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background-color: #f0f0f0; 
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            position: relative; /* Для позиционирования кнопки "Домой" */
+        } 
+        .home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
         }
-
-        .frame {
-            width: 450px;
-            background-color: white;
-            border-radius: 10px;
-            border: 2px solid #4CAF50;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group h4 {
-            margin-bottom: 5px;
-            text-align: left;
-        }
-
-        input {
-            width: 80%;
-            padding: 10px;
-            border: 1px solid #000;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            border: 1px solid #000;
-            border-radius: 5px;
-            background-color: #00fd5d;
+        .home-button a {
+            text-decoration: none;
+            padding: 8px 12px;
+            background-color: #4CAF50;
             color: white;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.1s;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
         }
-
-        button:hover {
-            background-color: #00b34b;
+        .home-button a:hover {
+            background-color: #45a049;
         }
-
-        button:active {
-            transform: scale(0.95);
-            background-color: #009639;
+        .frame { 
+            width: 450px; 
+            background-color: white; 
+            border-radius: 10px; 
+            border: 2px solid #4CAF50; 
+            padding: 20px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        } 
+        .input-group { 
+            margin-bottom: 15px; 
+        } 
+        .input-group h4 { 
+            margin-bottom: 5px; 
+            text-align: left; 
+        } 
+        input { 
+            width: 80%; 
+            padding: 10px; 
+            border: 1px solid #000; 
+            border-radius: 5px; 
+        } 
+        .button-group {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
         }
-    </style>
-</head>
+        .signupbtn {
+            margin-right: 10px;
+        }
+        button { 
+            padding: 10px 20px; 
+            border: 1px solid #000; 
+            border-radius: 5px; 
+            background-color: #00fd5d; 
+            color: white; 
+            cursor: pointer; 
+            transition: background-color 0.3s, transform 0.1s; 
+        } 
+        button:hover { 
+            background-color: #00b34b; 
+        } 
+        button:active { 
+            transform: scale(0.95); 
+            background-color: #009639; 
+        } 
+        .login-link {
+            text-align: right;
+            display: inline-block;
+            margin-left: auto;
+        }
+        .login-link a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .login-link a:hover {
+            color: #388e3c;
+        }
+        /* Flash сообщения */
+        .flash-messages {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+    </style> 
+</head> 
 <body>
-    <div class="frame">
-        <form method="POST", action="/register">
-            <div class="input-group">
-                <h4>Логин</h4>
-                <input type="text" name="username" placeholder="Введите логин" required>
-            </div>
-            <div class="input-group">
-                <h4>Пароль</h4>
-                <input type="password" name="password" placeholder="Введите пароль" required>
-            </div>
-            <div class="signupbtn">
-                <button type="submit">Зарегистрироваться</button>
-            </div>
-        </form>
+    <!-- Кнопка "Домой" в правом верхнем углу -->
+    <div class="home-button">
+        <a href="{{ url_for('home') }}">Домой</a>
     </div>
-</body>
+
+    
+
+    {% block content %}
+    <div class="frame">
+        <!-- Блок для отображения flash-сообщений -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('register') }}"> 
+            <div class="input-group"> 
+                <h4>Логин</h4> 
+                <input type="text" name="username" placeholder="Введите логин" required> 
+            </div> 
+            <div class="input-group"> 
+                <h4>Пароль</h4> 
+                <input type="password" name="password" placeholder="Введите пароль" required> 
+            </div> 
+            <div class="button-group">
+                <div class="signupbtn"> 
+                    <button type="submit">Зарегистрироваться</button> 
+                </div>
+                <!-- Текст со ссылкой на вход -->
+                <div class="login-link">
+                    <p>Уже есть аккаунт? <a href="{{ url_for('login_view') }}">Войти</a></p>
+                </div>
+            </div>
+        </form> 
+    </div> 
+    {% endblock %}
+</body> 
 </html>
