@@ -89,17 +89,19 @@
 <body>
     <div class="frame">
         <div class="content">
-            <div class="input-group">
-                <h4>Логин</h4>
-                <input type="text" placeholder="Введите логин"> <!-- Поле для ввода логина -->
-            </div>
-            <div class="input-group">
-                <h4>Пароль</h4>
-                <input type="password" placeholder="Введите пароль"> <!-- Поле для ввода пароля -->
-            </div>
-            <div class="signupbtn">
-                <button>Войти</button> <!-- Кнопка для входа -->
-            </div>
+            <form method="POST" action="{{ url_for('login_view') }}"> <!-- Добавлено действие формы -->
+                <div class="input-group">
+                    <h4>Логин</h4>
+                    <input type="text" name="username" placeholder="Введите логин" required> <!-- Поле для ввода логина -->
+                </div>
+                <div class="input-group">
+                    <h4>Пароль</h4>
+                    <input type="password" name="password" placeholder="Введите пароль" required> <!-- Поле для ввода пароля -->
+                </div>
+                <div class="signupbtn">
+                    <button type="submit">Войти</button> <!-- Кнопка для входа -->
+                </div>
+            </form>
         </div>
     </div>
 </body>
