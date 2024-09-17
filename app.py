@@ -32,7 +32,7 @@ def login_view():
             flash("Вход выполнен успешно!", "success")
             return redirect(url_for("base"))
         else:
-            flash("Неверный логин или пароль", "danger")
+            flash("Неверный пароль", "danger")
     return render_template("login.html")
 
 @app.route("/base", methods=['GET', "POST"])

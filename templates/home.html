@@ -17,6 +17,7 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
+            position: relative; /* Добавлено для абсолютного позиционирования дочерних элементов */
         }
 
         .container {
@@ -72,6 +73,24 @@
             margin: 0 10px;
             cursor: pointer;
         }
+
+        .profile {
+            position: absolute; /* Позиционирование для кнопки "Личный кабинет" */
+            top: 20px; /* Расстояние от верхнего края */
+            right: 20px; /* Расстояние от правого края */
+            
+        }
+
+        .profile button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -84,7 +103,9 @@
         <div class="buttons">
             <button onclick="login()">Войти</button>
             <button onclick="register()">Зарегистрироваться</button>
-            
+        </div>
+        <div class="profile">
+            <button onclick="profile()">Личный кабинет</button>
         </div>
     </div>
 
@@ -95,7 +116,10 @@
         function login() {
             window.location.href = "/login"
         }
+        function profile() {
+            window.location.href = "/profile" // Замените на нужный URL для личного кабинета
+        }
     </script>
 
 </body>
-</html
+</html>
