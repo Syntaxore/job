@@ -1,11 +1,102 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: "Ubuntu", sans-serif;
+            margin: 20px;
+        }
+
+        .header {
+            display: flex; /* Используем Flexbox для выравнивания */
+            justify-content: space-between; /* Распределяем пространство между элементами */
+            align-items: center; /* Выравниваем элементы по вертикали */
+        }
+
+        .print {
+            
+            margin-top: 0; /* Убираем отрицательный отступ */
+        }
+
+        .account {
+            text-align: right;
+            display: flex; /* Используем Flexbox для выравнивания */
+            align-items: center; /* Выравниваем элементы по вертикали */
+            position: relative; /* Для позиционирования выпадающего меню */
+        }
+
+        .avatar {
+            width: 40px; /* Ширина аватарки */
+            height: 40px; /* Высота аватарки */
+            border-radius: 50%; /* Закругляем углы для создания круга */
+            margin-left: 10px; /* Отступ слева от аватарки */
+            background-color: #ccc; /* Цвет фона для наглядности (можно заменить на изображение) */
+        }
+
+        .dropdown {
+            display: none; /* Скрываем выпадающее меню по умолчанию */
+            position: absolute; /* Позиционируем относительно родителя */
+            right: -15; /* Выравниваем по правому краю */
+            top: 100%; /* Позиционируем ниже текста "Аккаунт" */
+            background-color: white; /* Цвет фона выпадающего меню */
+            border: 1px solid #ccc; /* Рамка для выпадающего меню */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Тень для выпадающего меню */
+            z-index: 1; /* Устанавливаем порядок отображения */
+        }
+
+        .dropdown a {
+            display: block; /* Делаем ссылки блочными элементами */
+            padding: 10px; /* Отступы внутри ссылок */
+            text-decoration: none; /* Убираем подчеркивание */
+            color: black; /* Цвет текста */
+            cursor: pointer; /* Указатель при наведении */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f0f0; /* Цвет фона при наведении */
+        }
+    </style>
 </head>
 <body>
-    
+
+    <div class="header">
+        <div class="print">
+            <h1>Точка.</h1>
+        </div>
+
+        <div class="account">
+            <h4 id="account-toggle" style="cursor: pointer;">Аккаунт</h4> <!-- Указатель при наведении на текст "Аккаунт" -->
+            <div class="avatar"></div> <!-- Место для аватарки -->
+            <div class="dropdown" id="dropdown-menu">
+                <a href="#">Профиль</a>
+                <a href="#">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Получаем элементы
+        const accountToggle = document.getElementById('account-toggle');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        // Обработчик события для переключения видимости выпадающего меню
+        accountToggle.addEventListener('click', () => {
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Закрытие меню при клике вне его
+        window.addEventListener('click', (event) => {
+            if (!accountToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    </script>
+
 </body>
 </html>
