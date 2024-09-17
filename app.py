@@ -1,7 +1,7 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session
+from flask import Flask, request, render_template, redirect, url_for, flash, session, g
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import g
+
 app = Flask(__name__)
 app.secret_key = "secretkey"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -30,10 +30,14 @@ def login_view():
         elif check_password_hash(user.password, password):
             session["user_id"] = user.id
             flash("Вход выполнен успешно!", "success")
-            return redirect(url_for("home"))
+            return redirect(url_for("base"))
         else:
             flash("Неверный логин или пароль", "danger")
     return render_template("login.html")
+
+@app.route("/base", methods=['GET', "POST"])
+def base():
+    return render_template("base.html")
 
 # Главная страница
 @app.route("/", methods=['GET', "POST"])
@@ -46,7 +50,6 @@ def register():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
-        # Проверка на существование пользователя
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             flash("Пользователь с таким именем уже существует!", "danger")
@@ -76,10 +79,6 @@ def load_user():
         g.user = User.query.get(user_id)
     else:
         g.user = None
-
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)

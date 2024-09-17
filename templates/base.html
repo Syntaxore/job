@@ -14,51 +14,51 @@
         }
 
         .header {
-            display: flex; /* Используем Flexbox для выравнивания */
-            justify-content: space-between; /* Распределяем пространство между элементами */
-            align-items: center; /* Выравниваем элементы по вертикали */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .print {
-            margin-top: 0; /* Убираем отрицательный отступ */
+            margin-top: 0;
         }
 
         .account {
             text-align: right;
-            display: flex; /* Используем Flexbox для выравнивания */
-            align-items: center; /* Выравниваем элементы по вертикали */
-            position: relative; /* Для позиционирования выпадающего меню */
+            display: flex;
+            align-items: center;
+            position: relative;
         }
 
         .avatar {
-            width: 40px; /* Ширина аватарки */
-            height: 40px; /* Высота аватарки */
-            border-radius: 50%; /* Закругляем углы для создания круга */
-            margin-left: 10px; /* Отступ слева от аватарки */
-            background-color: #ccc; /* Цвет фона для наглядности (можно заменить на изображение) */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            background-color: #ccc;
         }
 
         .dropdown {
-            display: none; /* Скрываем выпадающее меню по умолчанию */
-            position: absolute; /* Позиционируем относительно родителя */
-            right: -15; /* Выравниваем по правому краю */
-            top: 100%; /* Позиционируем ниже текста "Аккаунт" */
-            background-color: white; /* Цвет фона выпадающего меню */
-            border: 1px solid #ccc; /* Рамка для выпадающего меню */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Тень для выпадающего меню */
-            z-index: 1; /* Устанавливаем порядок отображения */
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
         }
 
         .dropdown a {
-            display: block; /* Делаем ссылки блочными элементами */
-            padding: 10px; /* Отступы внутри ссылок */
-            text-decoration: none; /* Убираем подчеркивание */
-            color: black; /* Цвет текста */
-            cursor: pointer; /* Указатель при наведении */
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
         }
 
         .dropdown a:hover {
-            background-color: #f0f0f0; /* Цвет фона при наведении */
+            background-color: #f0f0f0;
         }
     </style>
 </head>
@@ -71,8 +71,8 @@
         {% if session.get('user_id') %}
             {% if g.user %}
                 <div class="account">
-                    <h4 id="account-toggle" style="cursor: pointer;">{{ g.user.username }}</h4> <!-- Указатель при наведении на текст "Аккаунт" -->
-                    <div class="avatar"></div> <!-- Место для аватарки -->
+                    <h4 id="account-toggle" style="cursor: pointer;">{{ g.user.username }}</h4>
+                    <div class="avatar"></div>
                     <div class="dropdown" id="dropdown-menu">
                         <a href="#">Профиль</a>
                         <a href="{{ url_for('logout') }}">Выйти</a>
@@ -85,16 +85,13 @@
     </div>
 
     <script>
-        // Получаем элементы
         const accountToggle = document.getElementById('account-toggle');
         const dropdownMenu = document.getElementById('dropdown-menu');
 
-        // Обработчик события для переключения видимости выпадающего меню
         accountToggle.addEventListener('click', () => {
             dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Закрытие меню при клике вне его
         window.addEventListener('click', (event) => {
             if (!accountToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
                 dropdownMenu.style.display = 'none';

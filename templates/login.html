@@ -16,7 +16,7 @@
             background-color: #f0f0f0; 
             font-family: 'Ubuntu', sans-serif;
             margin: 0;
-            position: relative; /* Для позиционирования кнопки "Домой" */
+            position: relative; 
         } 
         .home-button {
             margin: 20px;
@@ -94,7 +94,6 @@
         .register-link a:hover {
             color: #388e3c;
         }
-        /* Flash сообщения */
         .flash-messages {
             width: 100%;
             margin-bottom: 20px;
@@ -116,13 +115,11 @@
     </style> 
 </head> 
 <body>
-    <!-- Кнопка "Домой" в правом верхнем углу -->
     <div class="home-button">
         <a href="{{ url_for('home') }}">Домой</a>
     </div>
     
     <div class="frame">
-        <!-- Блок для отображения flash-сообщений -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-messages">
