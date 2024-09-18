@@ -22,6 +22,7 @@ class Job(db.Model):
     schedule = db.Column(db.String(50), nullable=False)
     requirements = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    number = db.Column(db.String(15), nullable=False)
 
     user = db.relationship('User', backref=db.backref('jobs', lazy=True))
 
@@ -109,8 +110,9 @@ def create():
         salary = request.form['salary']
         schedule = request.form['schedule']
         requirements = request.form['requirements']
-        
-        new_job = Job(title=title, salary=salary, schedule=schedule, requirements=requirements, user_id=g.user.id)
+        number = request.form['number']
+
+        new_job = Job(title=title, salary=salary, schedule=schedule, requirements=requirements, user_id=g.user.id, number=number)
         db.session.add(new_job)
         db.session.commit()
         flash("Вакансия успешно создана!", "success")
@@ -125,6 +127,7 @@ def load_user():
         g.user = User.query.get(user_id)
     else:
         g.user = None
+
 
 if __name__ == "__main__":
     app.run(debug=True)
