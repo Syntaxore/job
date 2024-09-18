@@ -104,9 +104,11 @@
             <button onclick="login()">Войти</button>
             <button onclick="register()">Зарегистрироваться</button>
         </div>
+        {% if g.user %}
         <div class="profile">
             <button onclick="profile()">Личный кабинет</button>
         </div>
+        {% endif %}
     </div>
 
     <script>

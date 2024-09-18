@@ -6,11 +6,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Точка. - работа вашей мечты</title>
     <style>
         body {
-            font-family: "Ubuntu", sans-serif;
+            font-family: 'Ubuntu', sans-serif;
             margin: 20px;
+            background-color: #f0f0f0;
         }
 
         .header {
@@ -60,6 +61,46 @@
         .dropdown a:hover {
             background-color: #f0f0f0;
         }
+
+        .job-list {
+            margin-top: 20px;
+        }
+
+        .job-item {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .job-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .job-details {
+            margin: 10px 0;
+        }
+
+        .apply-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .make_branch_button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Цвет фона */
+            color: white; /* Цвет текста */
+            border: none; /* Убираем рамку */
+            border-radius: 4px; /* Скругление углов */
+            cursor: pointer; /* Курсор при наведении */
+        }
+        
     </style>
 </head>
 <body>
@@ -68,19 +109,38 @@
         <div class="print">
             <h1>Точка.</h1>
         </div>
+        <div class="make_branch">
+            <button class="make_branch_button" onclick="createJob()">Создать вакансию</button>
+        </div>
         {% if session.get('user_id') %}
             {% if g.user %}
                 <div class="account">
                     <h4 id="account-toggle" style="cursor: pointer;">{{ g.user.username }}</h4>
                     <div class="avatar"></div>
                     <div class="dropdown" id="dropdown-menu">
-                        <a href="#">Профиль</a>
+                        <a href="{{ url_for('profile', user_id=g.user.id) }}">Профиль</a>
                         <a href="{{ url_for('logout') }}">Выйти</a>
                     </div>
                 </div>
-            {% else %}
-                <a href="{{ url_for('login_view') }}">Войти</a>
             {% endif %}
+        {% else %}
+            <a href="{{ url_for('login_view') }}">Войти</a>
+        {% endif %}
+    </div>
+
+    <div class="job-list">
+        {% if jobs %}
+            {% for job in jobs %}
+            <div class="job-item">
+                <div class="job-title">Должность: {{ job.title }}</div>
+                <div class="job-details">Зарплата: {{ job.salary }}</div>
+                <div class="job-details">График: {{ job.schedule }}</div>
+                <div class="job-details">Требования: {{ job.requirements }}</div>
+                <button class="apply-button" onclick="alert('Телефон работодателя: 123-456-7890')">Откликнуться</button>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Нет доступных вакансий.</p>
         {% endif %}
     </div>
 
@@ -97,6 +157,10 @@
                 dropdownMenu.style.display = 'none';
             }
         });
+
+        function createJob() {
+            window.location.href = "/create"; // Перенаправление на страницу создания вакансии
+        }
     </script>
 
 </body>

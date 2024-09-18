@@ -14,6 +14,17 @@ class User(db.Model):
     username = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String(150), nullable=False)
 
+# Модель объявления о работе
+class Job(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    salary = db.Column(db.String(50), nullable=False)
+    schedule = db.Column(db.String(50), nullable=False)
+    requirements = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    user = db.relationship('User', backref=db.backref('jobs', lazy=True))
+
 # Создание таблиц в базе данных
 with app.app_context():
     db.create_all()
@@ -30,14 +41,20 @@ def login_view():
         elif check_password_hash(user.password, password):
             session["user_id"] = user.id
             flash("Вход выполнен успешно!", "success")
-            return redirect(url_for("base"))
+            return redirect(url_for("main"))
         else:
             flash("Неверный пароль", "danger")
     return render_template("login.html")
 
-@app.route("/base", methods=['GET', "POST"])
-def base():
-    return render_template("base.html")
+# Главная страница
+@app.route("/main", methods=['GET', "POST"])
+def main():
+    if g.user is None:
+        flash("Пожалуйста, авторизуйтесь, чтобы просматривать объявления.", "danger")
+        return redirect(url_for("login_view"))
+
+    jobs = Job.query.all()  # Получаем все вакансии
+    return render_template("main.html", jobs=jobs)
 
 # Главная страница
 @app.route("/", methods=['GET', "POST"])
@@ -71,6 +88,35 @@ def logout():
     session.pop("user_id", None)
     flash("Вы вышли из системы", "success")
     return redirect(url_for("home"))
+
+# Маршрут для личного кабинета
+@app.route("/profile")
+def profile():
+    if g.user is None:
+        flash("Пожалуйста, войдите в систему, чтобы получить доступ к личному кабинету.", "danger")
+        return redirect(url_for("login_view"))
+    return render_template("profile.html", user=g.user)
+
+# Маршрут для создания вакансии
+@app.route("/create", methods=["GET", "POST"])
+def create():
+    if g.user is None:
+        flash("Пожалуйста, войдите в систему, чтобы создать вакансию.", "danger")
+        return redirect(url_for("login_view"))
+
+    if request.method == "POST":
+        title = request.form['title']
+        salary = request.form['salary']
+        schedule = request.form['schedule']
+        requirements = request.form['requirements']
+        
+        new_job = Job(title=title, salary=salary, schedule=schedule, requirements=requirements, user_id=g.user.id)
+        db.session.add(new_job)
+        db.session.commit()
+        flash("Вакансия успешно создана!", "success")
+        return redirect(url_for("main"))
+
+    return render_template("create.html")
 
 @app.before_request
 def load_user():
