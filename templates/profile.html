@@ -1,12 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Настройка профиля</title>
+    <style>
+        body {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background-color: #f0f0f0; 
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+        }
+        .frame {
+            width: 550px;
+            background-color: white;
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between buttons */
+        }
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:active {
+            transform: scale(0.95);
+            background-color: #388e3c;
+        }
+    </style>
 </head>
 <body>
-    <h1>My Contact Details</h1>
-
+    <div class="frame">
+        {% if session.get('user_id') %}
+            {% if g.user %}
+            <div class="account">
+                <p>Привет, {{ g.user.username }}!</p>
+            </div>
+            <h2>Настройка профиля</h2>
+            <div class="button-group">
+                <button>Смена логина</button>
+                <button>Смена пароля</button>
+                <button>Смена почты</button>
+                <button>Смена имени</button>
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
 </body>
 </html>
