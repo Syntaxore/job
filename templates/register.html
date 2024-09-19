@@ -16,7 +16,7 @@
             background-color: #f0f0f0; 
             font-family: 'Ubuntu', sans-serif;
             margin: 0;
-            position: relative; /* Для позиционирования кнопки "Домой" */
+            position: relative; 
         } 
         .home-button {
             margin: 20px;
@@ -95,7 +95,6 @@
         .login-link a:hover {
             color: #388e3c;
         }
-        /* Flash сообщения */
         .flash-messages {
             width: 100%;
             margin-bottom: 20px;
@@ -117,16 +116,12 @@
     </style> 
 </head> 
 <body>
-    <!-- Кнопка "Домой" в правом верхнем углу -->
     <div class="home-button">
         <a href="{{ url_for('home') }}">Домой</a>
     </div>
 
-    
-
     {% block content %}
     <div class="frame">
-        <!-- Блок для отображения flash-сообщений -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-messages">
@@ -147,12 +142,15 @@
             <div class="input-group"> 
                 <h4>Пароль</h4> 
                 <input type="password" name="password" placeholder="Введите пароль" required> 
-            </div> 
+            </div>
+            <div class="input-group">
+                <h4>Почта</h4>
+                <input type="email" name="email" placeholder="Введите почту" required>
+            </div>
             <div class="button-group">
                 <div class="signupbtn"> 
                     <button type="submit">Зарегистрироваться</button> 
                 </div>
-                <!-- Текст со ссылкой на вход -->
                 <div class="login-link">
                     <p>Уже есть аккаунт? <a href="{{ url_for('login_view') }}">Войти</a></p>
                 </div>

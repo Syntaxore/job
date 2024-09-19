@@ -13,6 +13,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), nullable=False, unique=True)
 
 # Модель объявления о работе
 class Job(db.Model):
@@ -34,11 +35,15 @@ with app.app_context():
 @app.route("/login", methods=["GET", "POST"])
 def login_view():
     if request.method == 'POST':
-        username = request.form['username']
+        username = request.form.get('username')
+        email = request.form.get('email')  # Получаем почту
         password = request.form['password']
-        user = User.query.filter_by(username=username).first()
+        
+        # Проверяем, есть ли пользователь по логину или почте
+        user = User.query.filter((User.username == username) | (User.email == email)).first()
+        
         if user is None:
-            flash("Пользователь с таким именем не существует", "danger")
+            flash("Пользователь с таким именем или почтой не существует", "danger")
         elif check_password_hash(user.password, password):
             session["user_id"] = user.id
             flash("Вход выполнен успешно!", "success")
@@ -68,11 +73,12 @@ def register():
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']  # Получаем почту
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             flash("Пользователь с таким именем уже существует!", "danger")
             return redirect(url_for('register'))
-        new_user = User(username=username, password=generate_password_hash(password))
+        new_user = User(username=username, password=generate_password_hash(password), email=email)
         db.session.add(new_user)
         try:
             db.session.commit()
@@ -127,7 +133,6 @@ def load_user():
         g.user = User.query.get(user_id)
     else:
         g.user = None
-
 
 if __name__ == "__main__":
     app.run(debug=True)
