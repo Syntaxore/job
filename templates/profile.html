@@ -13,7 +13,7 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
-            background-color: #f0f0f0; 
+            background: linear-gradient(to bottom right, #f0f0f0, #d9f9d9); 
             font-family: 'Ubuntu', sans-serif;
             margin: 0;
         }
@@ -22,21 +22,27 @@
             background-color: white;
             border-radius: 10px;
             border: 2px solid #4CAF50;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
         h2 {
             margin-bottom: 20px;
+            color: #4CAF50;
+            font-weight: 500;
+        }
+        .account p {
+            font-size: 18px;
             color: #333;
+            margin-bottom: 20px;
         }
         .button-group {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Space between buttons */
+            gap: 15px; /* Space between buttons */
         }
         button {
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 5px;
             background-color: #4CAF50;
@@ -44,6 +50,7 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         button:hover {
             background-color: #45a049;
@@ -65,8 +72,6 @@
             <div class="button-group">
                 <button>Смена логина</button>
                 <button>Смена пароля</button>
-                <button>Смена почты</button>
-                <button>Смена имени</button>
             </div>
             {% endif %}
         {% endif %}

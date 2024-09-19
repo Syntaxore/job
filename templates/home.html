@@ -3,7 +3,7 @@
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Точка. - работа вашей мечты</title>
@@ -16,18 +16,23 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
-            position: relative; /* Добавлено для абсолютного позиционирования дочерних элементов */
+            background: linear-gradient(to bottom right, #f0f0f0, #d9f9d9);
+            position: relative;
         }
 
         .container {
             text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background-color: white;
         }
 
         .title {
-            font-size: 48px;
+            font-size: 36px; /* Уменьшен размер шрифта */
             font-weight: bold;
             margin-bottom: 20px;
+            color: #4CAF50;
         }
 
         .search-container {
@@ -40,9 +45,15 @@
             padding: 10px 20px;
             font-size: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
             width: 500px;
             text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #4CAF50;
+            outline: none;
         }
 
         .search-button {
@@ -51,16 +62,20 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
-            margin-left: 10px; /* Отступ между полем ввода и кнопкой */
+            border-radius: 5px;
+            margin-left: 10px;
             cursor: pointer;
-            width: 150px;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #45a049;
         }
 
         .buttons {
-            position: absolute; /* Добавлено для абсолютного позиционирования */
-            top: 20px; /* Расстояние от верхнего края */
-            left: 20px; /* Расстояние от левого края */
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
 
         .buttons button {
@@ -69,16 +84,20 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             margin: 0 10px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #45a049;
         }
 
         .profile {
-            position: absolute; /* Позиционирование для кнопки "Личный кабинет" */
-            top: 20px; /* Расстояние от верхнего края */
-            right: 20px; /* Расстояние от правого края */
-            
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
 
         .profile button {
@@ -87,9 +106,14 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             margin: 0 10px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .profile button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -98,7 +122,7 @@
         <div class="title">Точка. - работа вашей мечты</div>
         <div class="search-container">
             <input type="text" class="search-input" placeholder="Поиск">
-            <button class="search-button">Поиск</button> <!-- Добавлена кнопка "Поиск" -->
+            <button class="search-button">Поиск</button>
         </div>
         <div class="buttons">
             <button onclick="login()">Войти</button>
@@ -122,6 +146,5 @@
             window.location.href = "/profile" // Замените на нужный URL для личного кабинета
         }
     </script>
-
 </body>
 </html>

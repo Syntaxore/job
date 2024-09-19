@@ -13,7 +13,7 @@
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
-            background-color: #f0f0f0; 
+            background: linear-gradient(to bottom right, #f0f0f0, #d9f9d9); 
             font-family: 'Ubuntu', sans-serif;
             margin: 0;
             position: relative; 
@@ -41,8 +41,8 @@
             background-color: white; 
             border-radius: 10px; 
             border: 2px solid #4CAF50; 
-            padding: 20px; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            padding: 30px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
         } 
         .input-group { 
             margin-bottom: 15px; 
@@ -50,13 +50,19 @@
         .input-group h4 { 
             margin-bottom: 5px; 
             text-align: left; 
+            color: #4CAF50;
         } 
         input { 
-            width: 80%; 
+            width: 90%; 
             padding: 10px; 
-            border: 1px solid #000; 
+            border: 1px solid #ccc; 
             border-radius: 5px; 
+            transition: border-color 0.3s;
         } 
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
         .button-group {
             display: flex;
             align-items: center;
@@ -67,19 +73,19 @@
         }
         button { 
             padding: 10px 20px; 
-            border: 1px solid #000; 
+            border: none; 
             border-radius: 5px; 
-            background-color: #00fd5d; 
+            background-color: #4CAF50; 
             color: white; 
             cursor: pointer; 
             transition: background-color 0.3s, transform 0.1s; 
         } 
         button:hover { 
-            background-color: #00b34b; 
+            background-color: #45a049; 
         } 
         button:active { 
             transform: scale(0.95); 
-            background-color: #009639; 
+            background-color: #388e3c; 
         } 
         .login-link {
             text-align: right;
@@ -120,7 +126,6 @@
         <a href="{{ url_for('home') }}">Домой</a>
     </div>
 
-    {% block content %}
     <div class="frame">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -142,11 +147,7 @@
             <div class="input-group"> 
                 <h4>Пароль</h4> 
                 <input type="password" name="password" placeholder="Введите пароль" required> 
-            </div>
-            <div class="input-group">
-                <h4>Почта</h4>
-                <input type="email" name="email" placeholder="Введите почту" required>
-            </div>
+            </div> 
             <div class="button-group">
                 <div class="signupbtn"> 
                     <button type="submit">Зарегистрироваться</button> 
@@ -157,6 +158,5 @@
             </div>
         </form> 
     </div> 
-    {% endblock %}
 </body> 
 </html>
