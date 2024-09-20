@@ -120,13 +120,40 @@ def create():
 
     return render_template("create.html")
 
-@app.route("/change_login")
+
+
+@app.route("/change_login", methods=["GET", "POST"])
 def change_login():
+    if g.user is None:
+        flash("Пожалуйста, войдите в систему, чтобы изменить логин.", "danger")
+        return redirect(url_for("login_view"))
+    if request.method == "POST":
+        new_username = request.form['new_username']
+        existing_user = User.query.filter_by(username=new_username).first()
+        if existing_user:
+            flash("Пользователь с таким именем уже существует!", "danger")
+        else:
+            g.user.username = new_username
+            db.session.commit()
+            flash("Логин успешно изменен!", "success")
+            return redirect(url_for("profile"))
     return render_template("change_login.html")
 
-@app.route("/change_password")
+@app.route("/change_password", methods=["GET", "POST"])
 def change_password():
+    if g.user is None:
+        flash("Пожалуйста, войдите в систему, чтобы изменить пароль.", "danger")
+        return redirect(url_for("login_view"))
+    
+    if request.method == "POST":
+        new_password = request.form['new_password']
+        g.user.password = generate_password_hash(new_password)
+        db.session.commit()
+        flash("Пароль успешно изменен!", "success")
+        return redirect(url_for("profile"))
+    
     return render_template("change_password.html")
+
 
 @app.before_request
 def load_user():

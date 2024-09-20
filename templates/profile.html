@@ -70,11 +70,19 @@
             </div>
             <h2>Настройка профиля</h2>
             <div class="button-group">
-                <button>Смена логина</button>
-                <button>Смена пароля</button>
+                <button onclick="change_login()">Смена логина</button>
+                <button onclick="change_password()">Смена пароля</button>
             </div>
             {% endif %}
         {% endif %}
     </div>
+    <script>
+        function change_login() {
+            window.location.href = "/change_login";
+        }
+        function change_password() {
+            window.location.href = "/change_password";
+        }
+    </script>
 </body>
 </html>
