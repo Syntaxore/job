@@ -41,29 +41,14 @@
             margin-bottom: 20px;
         }
 
-        .search-input {
-            padding: 10px 20px;
-            font-size: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 500px;
-            text-align: center;
-            transition: border-color 0.3s;
-        }
-
-        .search-input:focus {
-            border-color: #4CAF50;
-            outline: none;
-        }
-
         .search-button {
+            width: 100%;
             padding: 10px 20px;
             font-size: 16px;
             background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
-            margin-left: 10px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
@@ -121,8 +106,7 @@
     <div class="container">
         <div class="title">Точка. - работа вашей мечты</div>
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="Поиск">
-            <button class="search-button">Поиск</button>
+            <button class="search-button" onclick="searchJobs()">Поиск работы</button>
         </div>
         <div class="buttons">
             <button onclick="login()">Войти</button>
@@ -144,6 +128,9 @@
         }
         function profile() {
             window.location.href = "/profile" // Замените на нужный URL для личного кабинета
+        }
+        function searchJobs() {
+            window.location.href = "/main"
         }
     </script>
 </body>

@@ -120,6 +120,14 @@ def create():
 
     return render_template("create.html")
 
+@app.route("/change_login")
+def change_login():
+    return render_template("change_login.html")
+
+@app.route("/change_password")
+def change_password():
+    return render_template("change_password.html")
+
 @app.before_request
 def load_user():
     user_id = session.get("user_id")
