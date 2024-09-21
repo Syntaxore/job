@@ -159,7 +159,7 @@ def change_password():
 def load_user():
     user_id = session.get("user_id")
     if user_id:
-        g.user = User.query.get(user_id)
+        g.user = db.session.get(User, user_id)
     else:
         g.user = None
 
