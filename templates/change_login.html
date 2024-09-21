@@ -16,6 +16,22 @@
             background: linear-gradient(to bottom right, #f0f0f0, #d9f9d9); 
             font-family: 'Ubuntu', sans-serif;
             margin: 0;
+            position: relative; /* Добавлено для позиционирования кнопки */
+        }
+        .back-button {
+            position: absolute; /* Позиционирование кнопки */
+            top: 20px; /* Отступ сверху */
+            left: 20px; /* Отступ слева */
+            padding: 10px 15px; /* Отступы внутри кнопки */
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #45a049;
         }
         .frame {
             width: 550px;
@@ -75,6 +91,7 @@
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="window.history.back()">Назад</button>
     <div class="frame">
         {% if session.get('user_id') %}
             {% if g.user %}
@@ -87,16 +104,11 @@
                 <input type="text"  name="new_username" placeholder="Новый логин" required>
             </div>
             <div class="button-group">
-                <button onclick="change_login()">Изменить логин</button>
+                <button type="submit">Изменить логин</button>
             </div>
         </form>
             {% endif %}
         {% endif %}
     </div>
-    <script>
-        function change_login() {
-            window.location.href = "/change_login";
-        }
-    </script>
 </body>
 </html>
