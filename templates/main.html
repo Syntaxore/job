@@ -100,6 +100,23 @@
             border-radius: 4px; /* Скругление углов */
             cursor: pointer; /* Курсор при наведении */
         }
+
+        /* Стили для flash-сообщений */
+        .flash-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
         
     </style>
 </head>
@@ -127,6 +144,15 @@
             <a href="{{ url_for('login_view') }}">Войти</a>
         {% endif %}
     </div>
+
+    <!-- Блок для отображения flash-сообщений -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
     <div class="job-list">
         {% if jobs %}
